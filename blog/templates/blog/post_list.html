@@ -2,12 +2,29 @@
 
 {% block content %}
     {% for post in posts %}
+        <a href="{% url 'is_done' pk=post.pk %}">
+            <div {% if post.is_done %} class="is_done"{% endif %}>
+
+
         <div class="post">
             <div class="date">
-                {{ post.published_date }}
+                {{ post.created_date }}
             </div>
-            <h1><a href="{% url 'post_detail' pk=post.pk %}">{{ post.title }}</a></h1>
-            <p>{{ post.text|linebreaksbr }}</p>
+            <h1>{{ post.task }}</h1>
+            <p>{{ post.detail|linebreaksbr }}</p>
+
         </div>
+            </div>
+        </a>
     {% endfor %}
+<style>
+    a,a:hover {
+    color:#000;
+    text-decoration:none;
+    }
+    .is_done{
+    text-decoration: line-through;
+    }
+
+</style>
 {% endblock %}
